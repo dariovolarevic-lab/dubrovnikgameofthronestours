@@ -1,6 +1,9 @@
 {
-  "name": "Game of Thrones Tours Dubrovnik",
+  "name": "Dubrovnik Game of Thrones Tours",
   "short_name": "GoT Tours",
+  "description": "Game of Thrones walking tours in Dubrovnik, Croatia. Explore King's Landing filming locations with expert local guides.",
+  "start_url": "/",
+  "scope": "/",
   "icons": [
     {
       "src": "assets/images/logo.webp",

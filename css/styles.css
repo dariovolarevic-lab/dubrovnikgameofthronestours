@@ -1509,6 +1509,30 @@ a:hover {
     min-height: 80px;
 }
 
+.form-group input[type="date"],
+.form-group input[type="time"] {
+    cursor: pointer;
+}
+
+.form-group input[type="date"]::-webkit-calendar-picker-indicator,
+.form-group input[type="time"]::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+    opacity: 0.8;
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-position: right 14px center;
+    background-size: 18px;
+}
+
+.form-group input[type="date"],
+.form-group input[type="time"] {
+    position: relative;
+}
+
 .form-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -2745,5 +2769,155 @@ a:hover {
 
     .booking-form-wrapper {
         padding: 24px;
+    }
+}
+
+/* Sticky Booking Bar */
+.sticky-booking-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: rgba(10, 10, 10, 0.95);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-top: 1px solid rgba(200, 169, 81, 0.2);
+    padding: 12px 0;
+    transform: translateY(100%);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    pointer-events: none;
+}
+
+.sticky-booking-bar.visible {
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.sticky-booking-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.sticky-booking-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.sticky-booking-name {
+    font-family: 'Cinzel', serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--white);
+    letter-spacing: 0.5px;
+}
+
+.sticky-booking-price {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.8rem;
+    color: var(--gold);
+    font-weight: 500;
+}
+
+.sticky-booking-btn {
+    white-space: nowrap;
+    padding: 10px 28px;
+    font-size: 0.75rem;
+}
+
+/* Booking Platform Buttons */
+.booking-buttons {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn-platform {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    border-radius: 6px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+    white-space: nowrap;
+}
+
+.btn-platform:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.1);
+}
+
+.btn-platform svg {
+    flex-shrink: 0;
+}
+
+.btn-ta {
+    background: #34e0a1;
+    color: #000;
+    box-shadow: 0 2px 12px rgba(52, 224, 161, 0.25);
+}
+
+.btn-ta:hover {
+    box-shadow: 0 4px 20px rgba(52, 224, 161, 0.4);
+}
+
+.btn-gyg {
+    background: #ff5533;
+    color: #fff;
+    box-shadow: 0 2px 12px rgba(255, 85, 51, 0.25);
+}
+
+.btn-gyg:hover {
+    box-shadow: 0 4px 20px rgba(255, 85, 51, 0.4);
+}
+
+.booking-buttons-sticky .btn-platform {
+    padding: 8px 18px;
+    font-size: 0.7rem;
+}
+
+.booking-buttons-sticky .btn-platform svg {
+    width: 14px;
+    height: 14px;
+}
+
+@media (max-width: 480px) {
+    .sticky-booking-inner {
+        gap: 12px;
+    }
+
+    .sticky-booking-name {
+        font-size: 0.75rem;
+    }
+
+    .sticky-booking-btn {
+        padding: 10px 20px;
+        font-size: 0.7rem;
+    }
+
+    .booking-buttons-sticky {
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .booking-buttons-sticky .btn-platform {
+        padding: 7px 14px;
+        font-size: 0.65rem;
+    }
+
+    .btn-platform {
+        padding: 10px 18px;
+        font-size: 0.75rem;
     }
 }
