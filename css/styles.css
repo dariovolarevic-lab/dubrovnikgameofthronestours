@@ -1682,7 +1682,7 @@ a:hover {
 /* Tour Hero */
 .tour-hero {
     position: relative;
-    min-height: 100vh;
+    min-height: 70vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1704,9 +1704,7 @@ a:hover {
 }
 
 .tour-hero-sunset {
-    background: url('../assets/images/logo aktivnosti na naslovnici/GOT%26DU.webp') center center / cover no-repeat;
-    aspect-ratio: 3 / 2;
-    min-height: auto;
+    background: url('../assets/images/logo aktivnosti na naslovnici/GOT%26DU.webp') center top / cover no-repeat;
 }
 
 .tour-hero-sunset .tour-hero-overlay {
