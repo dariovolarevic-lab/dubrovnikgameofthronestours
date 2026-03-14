@@ -1,0 +1,14 @@
+{
+  "name": "Game of Thrones Tours Dubrovnik",
+  "short_name": "GoT Tours",
+  "icons": [
+    {
+      "src": "assets/images/logo.webp",
+      "sizes": "612x408",
+      "type": "image/webp"
+    }
+  ],
+  "display": "browser",
+  "background_color": "#0a0a0a",
+  "theme_color": "#c8a951"
+}
