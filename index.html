@@ -32,6 +32,7 @@
     <link rel="alternate" hreflang="en" href="https://www.dubrovnikgameofthronestours.com/">
     <link rel="alternate" hreflang="x-default" href="https://www.dubrovnikgameofthronestours.com/">
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="preload" href="assets/images/logo.webp" as="image">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -66,7 +67,7 @@
         <div class="hero-overlay"></div>
         <div class="hero-particles" id="heroParticles"></div>
         <div class="hero-content">
-            <p class="hero-subtitle"><img src="assets/images/logo.webp" alt="Game of Thrones Tours Dubrovnik" class="hero-logo"></p>
+            <p class="hero-subtitle"><img src="assets/images/logo.webp" alt="Game of Thrones Tours Dubrovnik" class="hero-logo" fetchpriority="high" width="180" height="180"></p>
             <h1 class="hero-title">Game of Thrones Walking Tours<br><span class="text-gold">Dubrovnik</span></h1>
             <p class="hero-description">Explore the real King's Landing filming locations with expert local guides. Walk through Dubrovnik's Old Town, visit the Red Keep, the Walk of Shame, and sail to Lokrum Island — the real Qarth.</p>
             <div class="hero-actions">
@@ -111,7 +112,7 @@
                     <div class="tour-image">
                         <video class="lazy-video" muted loop playsinline preload="none" style="width:100%;height:100%;object-fit:cover;display:block;">
                             <source src="assets/video/videa/got tour animation.webm" type="video/webm">
-                            <img src="assets/images/logo lokrum ture.webp" alt="Game of Thrones Tour Dubrovnik" style="width:100%;height:100%;object-fit:cover;display:block;">
+                            <img loading="lazy" decoding="async" src="assets/images/logo lokrum ture.webp" alt="Game of Thrones Tour Dubrovnik" style="width:100%;height:100%;object-fit:cover;display:block;">
                         </video>
                     </div>
                     <div class="tour-content">
@@ -143,7 +144,7 @@
                     <div class="tour-image">
                         <video class="lazy-video" muted loop playsinline preload="none" style="width:100%;height:100%;object-fit:cover;display:block;">
                             <source src="assets/video/videa/got lokrum.webm" type="video/webm">
-                            <img src="assets/images/logo aktivnosti na naslovnici/GOT LOKRUM.webp" alt="Dubrovnik Game of Thrones & Lokrum Island Tour" style="width:100%;height:100%;object-fit:cover;display:block;">
+                            <img loading="lazy" decoding="async" src="assets/images/logo aktivnosti na naslovnici/GOT LOKRUM.webp" alt="Dubrovnik Game of Thrones & Lokrum Island Tour" style="width:100%;height:100%;object-fit:cover;display:block;">
                         </video>
                     </div>
                     <div class="tour-content">
@@ -175,7 +176,7 @@
                     <div class="tour-image">
                         <video class="lazy-video" muted loop playsinline preload="none" style="width:100%;height:100%;object-fit:cover;display:block;">
                             <source src="assets/video/videa/game of thrones and Dubrovnik TOUR.webm" type="video/webm">
-                            <img src="assets/images/logo aktivnosti na naslovnici/mix tura.webp" alt="Game of Thrones & Dubrovnik History Tour" style="width:100%;height:100%;object-fit:cover;display:block;">
+                            <img loading="lazy" decoding="async" src="assets/images/logo aktivnosti na naslovnici/mix tura.webp" alt="Game of Thrones & Dubrovnik History Tour" style="width:100%;height:100%;object-fit:cover;display:block;">
                         </video>
                     </div>
                     <div class="tour-content">
@@ -218,9 +219,9 @@
             <div class="locations-grid">
                 <div class="location-card">
                     <div class="location-image ba-slider">
-                        <img class="ba-after" src="assets/images/Slike Lokacija/kings landing/dubrovnik old town.webp" alt="King's Landing - Dubrovnik today">
+                        <img loading="lazy" decoding="async" class="ba-after" src="assets/images/Slike Lokacija/kings landing/dubrovnik old town.webp" alt="King's Landing - Dubrovnik today">
                         <div class="ba-before-wrap">
-                            <img class="ba-before" src="assets/images/Slike Lokacija/kings landing/kings landing.webp" alt="King's Landing - Game of Thrones">
+                            <img loading="lazy" decoding="async" class="ba-before" src="assets/images/Slike Lokacija/kings landing/kings landing.webp" alt="King's Landing - Game of Thrones">
                         </div>
                         <div class="ba-handle">
                             <div class="ba-line"></div>
@@ -235,9 +236,9 @@
                 </div>
                 <div class="location-card">
                     <div class="location-image ba-slider">
-                        <img class="ba-after" src="assets/images/Slike Lokacija/pile/pile.webp" alt="Pile Gate - King's Landing">
+                        <img loading="lazy" decoding="async" class="ba-after" src="assets/images/Slike Lokacija/pile/pile.webp" alt="Pile Gate - King's Landing">
                         <div class="ba-before-wrap">
-                            <img class="ba-before" src="assets/images/Slike Lokacija/pile/ulaz u gard.webp" alt="Pile Gate today">
+                            <img loading="lazy" decoding="async" class="ba-before" src="assets/images/Slike Lokacija/pile/ulaz u gard.webp" alt="Pile Gate today">
                         </div>
                         <div class="ba-handle">
                             <div class="ba-line"></div>
@@ -252,9 +253,9 @@
                 </div>
                 <div class="location-card">
                     <div class="location-image ba-slider">
-                        <img class="ba-after" src="assets/images/Slike Lokacija/old port/black water bay real.webp" alt="Old Port Dubrovnik today">
+                        <img loading="lazy" decoding="async" class="ba-after" src="assets/images/Slike Lokacija/old port/black water bay real.webp" alt="Old Port Dubrovnik today">
                         <div class="ba-before-wrap">
-                            <img class="ba-before" src="assets/images/Slike Lokacija/old port/black water bay 1.webp" alt="Old Port - Blackwater Bay GoT">
+                            <img loading="lazy" decoding="async" class="ba-before" src="assets/images/Slike Lokacija/old port/black water bay 1.webp" alt="Old Port - Blackwater Bay GoT">
                         </div>
                         <div class="ba-handle">
                             <div class="ba-line"></div>
@@ -269,9 +270,9 @@
                 </div>
                 <div class="location-card">
                     <div class="location-image ba-slider">
-                        <img class="ba-after" src="assets/images/Slike Lokacija/fort lovrijenac/lovrijenac reed keep.webp" alt="Fort Lovrijenac - The Red Keep GoT">
+                        <img loading="lazy" decoding="async" class="ba-after" src="assets/images/Slike Lokacija/fort lovrijenac/lovrijenac reed keep.webp" alt="Fort Lovrijenac - The Red Keep GoT">
                         <div class="ba-before-wrap">
-                            <img class="ba-before" src="assets/images/Slike Lokacija/fort lovrijenac/red keep fort.webp" alt="Fort Lovrijenac today">
+                            <img loading="lazy" decoding="async" class="ba-before" src="assets/images/Slike Lokacija/fort lovrijenac/red keep fort.webp" alt="Fort Lovrijenac today">
                         </div>
                         <div class="ba-handle">
                             <div class="ba-line"></div>
@@ -286,9 +287,9 @@
                 </div>
                 <div class="location-card">
                     <div class="location-image ba-slider">
-                        <img class="ba-after" src="assets/images/Slike Lokacija/Jesuit Stairs/walk of shame.webp" alt="Jesuit Staircase today">
+                        <img loading="lazy" decoding="async" class="ba-after" src="assets/images/Slike Lokacija/Jesuit Stairs/walk of shame.webp" alt="Jesuit Staircase today">
                         <div class="ba-before-wrap">
-                            <img class="ba-before" src="assets/images/Slike Lokacija/Jesuit Stairs/walk of shame 1.webp" alt="Jesuit Staircase - Walk of Shame GoT">
+                            <img loading="lazy" decoding="async" class="ba-before" src="assets/images/Slike Lokacija/Jesuit Stairs/walk of shame 1.webp" alt="Jesuit Staircase - Walk of Shame GoT">
                         </div>
                         <div class="ba-handle">
                             <div class="ba-line"></div>
@@ -303,9 +304,9 @@
                 </div>
                 <div class="location-card">
                     <div class="location-image ba-slider">
-                        <img class="ba-after" src="assets/images/Slike Lokacija/lokrum/lokrum live.webp" alt="Lokrum Island today">
+                        <img loading="lazy" decoding="async" class="ba-after" src="assets/images/Slike Lokacija/lokrum/lokrum live.webp" alt="Lokrum Island today">
                         <div class="ba-before-wrap">
-                            <img class="ba-before" src="assets/images/Slike Lokacija/lokrum/lokrum island.webp" alt="Lokrum Island - Qarth GoT">
+                            <img loading="lazy" decoding="async" class="ba-before" src="assets/images/Slike Lokacija/lokrum/lokrum island.webp" alt="Lokrum Island - Qarth GoT">
                         </div>
                         <div class="ba-handle">
                             <div class="ba-line"></div>
@@ -338,61 +339,61 @@
             <div class="gallery-carousel">
             <div class="gallery-grid">
                 <div class="gallery-item large">
-                    <img src="assets/images/GALERIJA/1.webp" alt="Game of Thrones Tour Dubrovnik">
+                    <img loading="lazy" decoding="async" src="assets/images/GALERIJA/1.webp" alt="Game of Thrones Tour Dubrovnik">
                 </div>
                 <div class="gallery-item">
-                    <img src="assets/images/GALERIJA/iron throne.webp" alt="Iron Throne Dubrovnik">
+                    <img loading="lazy" decoding="async" src="assets/images/GALERIJA/iron throne.webp" alt="Iron Throne Dubrovnik">
                 </div>
                 <div class="gallery-item">
-                    <img src="assets/images/GALERIJA/4.webp" alt="Game of Thrones Tour">
+                    <img loading="lazy" decoding="async" src="assets/images/GALERIJA/4.webp" alt="Game of Thrones Tour">
                 </div>
                 <div class="gallery-item">
-                    <img src="assets/images/GALERIJA/5.webp" alt="Dubrovnik filming location">
+                    <img loading="lazy" decoding="async" src="assets/images/GALERIJA/5.webp" alt="Dubrovnik filming location">
                 </div>
                 <div class="gallery-item">
-                    <img src="assets/images/GALERIJA/6.webp" alt="King's Landing tour">
+                    <img loading="lazy" decoding="async" src="assets/images/GALERIJA/6.webp" alt="King's Landing tour">
                 </div>
                 <div class="gallery-item">
-                    <img src="assets/images/GALERIJA/7.webp" alt="GoT tour group">
+                    <img loading="lazy" decoding="async" src="assets/images/GALERIJA/7.webp" alt="GoT tour group">
                 </div>
                 <div class="gallery-item large">
-                    <img src="assets/images/GALERIJA/9.webp" alt="Dubrovnik Old Town tour">
+                    <img loading="lazy" decoding="async" src="assets/images/GALERIJA/9.webp" alt="Dubrovnik Old Town tour">
                 </div>
                 <div class="gallery-item">
-                    <img src="assets/images/GALERIJA/11.webp" alt="Game of Thrones location">
+                    <img loading="lazy" decoding="async" src="assets/images/GALERIJA/11.webp" alt="Game of Thrones location">
                 </div>
                 <div class="gallery-item">
-                    <img src="assets/images/GALERIJA/14.webp" alt="Dubrovnik tour experience">
+                    <img loading="lazy" decoding="async" src="assets/images/GALERIJA/14.webp" alt="Dubrovnik tour experience">
                 </div>
                 <div class="gallery-item">
-                    <img src="assets/images/GALERIJA/145 (21).webp" alt="King's Landing tour group">
+                    <img loading="lazy" decoding="async" src="assets/images/GALERIJA/145 (21).webp" alt="King's Landing tour group">
                 </div>
                 <div class="gallery-item">
-                    <img src="assets/images/GALERIJA/black water bay.webp" alt="Blackwater Bay Old Port">
+                    <img loading="lazy" decoding="async" src="assets/images/GALERIJA/black water bay.webp" alt="Blackwater Bay Old Port">
                 </div>
                 <div class="gallery-item large">
-                    <img src="assets/images/GALERIJA/city wall tour 25.webp" alt="Dubrovnik city wall tour">
+                    <img loading="lazy" decoding="async" src="assets/images/GALERIJA/city wall tour 25.webp" alt="Dubrovnik city wall tour">
                 </div>
                 <div class="gallery-item">
-                    <img src="assets/images/GALERIJA/discover walking tour Dubrovnik.webp" alt="Discover Dubrovnik walking tour">
+                    <img loading="lazy" decoding="async" src="assets/images/GALERIJA/discover walking tour Dubrovnik.webp" alt="Discover Dubrovnik walking tour">
                 </div>
                 <div class="gallery-item">
-                    <img src="assets/images/GALERIJA/dubrovnik citiy wall tour 24.webp" alt="Dubrovnik city wall tour">
+                    <img loading="lazy" decoding="async" src="assets/images/GALERIJA/dubrovnik citiy wall tour 24.webp" alt="Dubrovnik city wall tour">
                 </div>
                 <div class="gallery-item">
-                    <img src="assets/images/GALERIJA/dubrovnik city wall tour 22.webp" alt="Dubrovnik city wall tour">
+                    <img loading="lazy" decoding="async" src="assets/images/GALERIJA/dubrovnik city wall tour 22.webp" alt="Dubrovnik city wall tour">
                 </div>
                 <div class="gallery-item">
-                    <img src="assets/images/GALERIJA/dubrovnik tour 20.webp" alt="Dubrovnik GoT tour">
+                    <img loading="lazy" decoding="async" src="assets/images/GALERIJA/dubrovnik tour 20.webp" alt="Dubrovnik GoT tour">
                 </div>
                 <div class="gallery-item">
-                    <img src="assets/images/GALERIJA/dubrovnik walking tour 21.webp" alt="Dubrovnik walking tour">
+                    <img loading="lazy" decoding="async" src="assets/images/GALERIJA/dubrovnik walking tour 21.webp" alt="Dubrovnik walking tour">
                 </div>
                 <div class="gallery-item">
-                    <img src="assets/images/GALERIJA/dubrovnik walking tour 23.webp" alt="Dubrovnik walking tour">
+                    <img loading="lazy" decoding="async" src="assets/images/GALERIJA/dubrovnik walking tour 23.webp" alt="Dubrovnik walking tour">
                 </div>
                 <div class="gallery-item">
-                    <img src="assets/images/GALERIJA/history tour.webp" alt="Dubrovnik history tour">
+                    <img loading="lazy" decoding="async" src="assets/images/GALERIJA/history tour.webp" alt="Dubrovnik history tour">
                 </div>
             </div>
             </div>
