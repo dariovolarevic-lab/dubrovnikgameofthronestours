@@ -2046,6 +2046,13 @@ a:hover {
     white-space: nowrap;
 }
 
+.meta-months {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.5);
+}
+
 .tour-hero-note {
     font-size: 0.78rem;
     color: var(--text-muted);
@@ -2850,6 +2857,12 @@ a:hover {
 
     .meta-value {
         font-size: 0.85rem;
+    }
+
+    .meta-months {
+        display: block;
+        font-size: 0.6rem;
+        margin-top: 1px;
     }
 
     .tour-gallery-grid {
