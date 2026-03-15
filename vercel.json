@@ -1,6 +1,9 @@
 {
-  "rewrites": [
-    { "source": "/api/booking", "destination": "/api/booking" },
-    { "source": "/api/contact", "destination": "/api/contact" }
-  ]
+  "buildCommand": "",
+  "outputDirectory": ".",
+  "functions": {
+    "api/*.js": {
+      "runtime": "@vercel/node@3"
+    }
+  }
 }
