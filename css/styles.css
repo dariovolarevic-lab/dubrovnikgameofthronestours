@@ -2702,6 +2702,12 @@ a:hover {
         gap: 12px;
     }
 
+    .meta-item {
+        flex: 1 1 0;
+        max-width: none;
+        min-width: 0;
+    }
+
     .included-grid {
         grid-template-columns: 1fr;
     }
