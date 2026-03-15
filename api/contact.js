@@ -23,7 +23,10 @@ module.exports = async (req, res) => {
     if (req.method === 'OPTIONS') return res.status(200).end();
     if (req.method !== 'POST') return res.status(405).json({ ok: false, message: 'Method not allowed' });
 
-    const { name, email, tour, date, message } = req.body;
+    const { name, email, tour, date, message, website } = req.body;
+
+    // Honeypot spam check
+    if (website) return res.json({ ok: true, message: 'Message sent! We will get back to you soon.' });
 
     if (!name || !email || !message) {
         return res.status(400).json({ ok: false, message: 'Please fill in all required fields.' });

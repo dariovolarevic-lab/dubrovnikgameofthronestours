@@ -301,6 +301,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const submitBtn = bookingForm.querySelector('button[type="submit"]');
         const originalText = submitBtn.textContent;
 
+        // Honeypot spam check
+        if (data.website) { showNotification('Message sent! We will get back to you soon.', 'success'); bookingForm.reset(); return; }
+        delete data.website;
+
         // Detect form type: booking (has 'date' + 'time') vs contact (has 'message')
         var isBooking = data.date && data.time;
         var endpoint = isBooking ? '/api/booking' : '/api/contact';

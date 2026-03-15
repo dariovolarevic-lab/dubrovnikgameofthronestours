@@ -348,6 +348,10 @@
                 </div>
                 <div class="booking-form-wrapper">
                     <form class="booking-form" id="bookingForm">
+                        <div class="form-group" style="position:absolute;left:-9999px;opacity:0;height:0;overflow:hidden;" aria-hidden="true" tabindex="-1">
+                            <label for="website">Website</label>
+                            <input type="text" id="website" name="website" autocomplete="off" tabindex="-1">
+                        </div>
                         <div class="form-group">
                             <label for="tourName">Tour</label>
                             <input type="text" id="tourName" name="tour" value="GoT &amp; Lokrum Island Tour" readonly class="form-readonly">
@@ -396,7 +400,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="groupSize">Group Size</label>
-                                <input type="number" id="groupSize" name="groupSize" min="1" max="30" placeholder="Number of guests" required>
+                                <input type="number" id="groupSize" name="groupSize" min="1" max="500" placeholder="Number of guests" required>
                             </div>
                         </div>
                         <div class="form-group">
