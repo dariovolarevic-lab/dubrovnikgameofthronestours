@@ -2865,6 +2865,12 @@ a:hover {
         margin-top: 1px;
     }
 
+    .meta-value.meta-note {
+        font-size: 0.55rem;
+        white-space: normal;
+        line-height: 1.3;
+    }
+
     .tour-gallery-grid {
         grid-template-columns: 1fr;
         grid-auto-rows: 200px;
