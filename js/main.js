@@ -28,8 +28,9 @@ document.addEventListener('DOMContentLoaded', () => {
         lazyVideos.forEach(v => videoObserver.observe(v));
     }
 
-    // --- Equalize Tour Card Rows ---
+    // --- Equalize Tour Card Rows (desktop only) ---
     function equalizeTourCards() {
+        if (window.innerWidth <= 768) return;
         const names = document.querySelectorAll('.tour-name');
         const descs = document.querySelectorAll('.tour-desc');
         const details = document.querySelectorAll('.tour-details');
@@ -40,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
             group.forEach(el => el.style.minHeight = max + 'px');
         });
     }
-    equalizeTourCards();
+    requestAnimationFrame(equalizeTourCards);
     window.addEventListener('resize', equalizeTourCards);
 
     // --- Navbar Scroll Effect ---
