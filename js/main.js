@@ -180,6 +180,43 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     } // end carousel guard
 
+    // --- Locations Carousel (mobile only) ---
+    function setupMobileCarousel(gridSelector, prevId, nextId, itemSelector) {
+        var grid = document.querySelector(gridSelector);
+        var prev = document.getElementById(prevId);
+        var next = document.getElementById(nextId);
+        if (!grid || !prev || !next) return;
+        var idx = 0;
+
+        function getItems() { return grid.querySelectorAll(itemSelector); }
+        function isMobile() { return window.innerWidth <= 768; }
+
+        function update() {
+            if (!isMobile()) { grid.style.transform = ''; idx = 0; return; }
+            var items = getItems();
+            if (!items.length) return;
+            var item = items[0];
+            var gap = 16;
+            var w = item.getBoundingClientRect().width + gap;
+            grid.style.transform = 'translateX(-' + (idx * w) + 'px)';
+        }
+
+        prev.addEventListener('click', function() {
+            if (idx > 0) { idx--; update(); }
+        });
+        next.addEventListener('click', function() {
+            var max = getItems().length - 1;
+            if (idx < max) { idx++; update(); }
+        });
+        window.addEventListener('resize', function() {
+            idx = Math.min(idx, getItems().length - 1);
+            update();
+        });
+    }
+
+    setupMobileCarousel('.locations-grid', 'locPrev', 'locNext', '.location-card');
+    setupMobileCarousel('.gallery-grid', 'galPrev', 'galNext', '.gallery-item');
+
     // --- Contact Form ---
     const bookingForm = document.getElementById('bookingForm');
 
