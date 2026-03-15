@@ -112,8 +112,17 @@ document.addEventListener('DOMContentLoaded', () => {
     routeStops.forEach(stop => {
         stop.addEventListener('click', () => {
             const wasActive = stop.classList.contains('active');
-            routeStops.forEach(s => s.classList.remove('active'));
-            if (!wasActive) stop.classList.add('active');
+            // Close all stops and their fee badges
+            routeStops.forEach(s => {
+                s.classList.remove('active');
+                var badge = s.querySelector('.route-fee-toggle');
+                if (badge) badge.classList.remove('active');
+            });
+            if (!wasActive) {
+                stop.classList.add('active');
+                var badge = stop.querySelector('.route-fee-toggle');
+                if (badge) badge.classList.add('active');
+            }
         });
     });
 
@@ -191,13 +200,17 @@ document.addEventListener('DOMContentLoaded', () => {
         function getItems() { return grid.querySelectorAll(itemSelector); }
         function isMobile() { return window.innerWidth <= 768; }
 
-        function update() {
-            if (!isMobile()) { grid.style.transform = ''; idx = 0; return; }
+        function getItemWidth() {
             var items = getItems();
-            if (!items.length) return;
-            var item = items[0];
-            var gap = 16;
-            var w = item.getBoundingClientRect().width + gap;
+            if (!items.length) return 0;
+            return items[0].getBoundingClientRect().width + 16;
+        }
+
+        function update(animate) {
+            if (!isMobile()) { grid.style.transform = ''; grid.style.transition = ''; idx = 0; return; }
+            var w = getItemWidth();
+            if (!w) return;
+            grid.style.transition = animate !== false ? 'transform 0.4s ease' : 'none';
             grid.style.transform = 'translateX(-' + (idx * w) + 'px)';
         }
 
@@ -208,6 +221,49 @@ document.addEventListener('DOMContentLoaded', () => {
             var max = getItems().length - 1;
             if (idx < max) { idx++; update(); }
         });
+
+        // Touch/swipe support
+        var startX = 0, startY = 0, currentX = 0, dragging = false, moved = false;
+
+        grid.addEventListener('touchstart', function(e) {
+            if (!isMobile()) return;
+            // Don't interfere with before/after slider
+            if (e.target.closest('.ba-slider')) return;
+            startX = e.touches[0].clientX;
+            startY = e.touches[0].clientY;
+            currentX = startX;
+            dragging = true;
+            moved = false;
+            grid.style.transition = 'none';
+            // Hide overlays during swipe
+            grid.classList.add('swiping');
+        }, { passive: true });
+
+        grid.addEventListener('touchmove', function(e) {
+            if (!dragging || !isMobile()) return;
+            currentX = e.touches[0].clientX;
+            var diffX = currentX - startX;
+            var diffY = e.touches[0].clientY - startY;
+            // Only swipe horizontally
+            if (Math.abs(diffX) > 10) moved = true;
+            if (!moved && Math.abs(diffY) > Math.abs(diffX)) { dragging = false; grid.classList.remove('swiping'); return; }
+            if (moved) e.preventDefault();
+            var w = getItemWidth();
+            var offset = -(idx * w) + diffX;
+            grid.style.transform = 'translateX(' + offset + 'px)';
+        }, { passive: false });
+
+        grid.addEventListener('touchend', function() {
+            if (!dragging || !isMobile()) { grid.classList.remove('swiping'); return; }
+            dragging = false;
+            grid.classList.remove('swiping');
+            var diffX = currentX - startX;
+            var max = getItems().length - 1;
+            if (diffX < -50 && idx < max) { idx++; }
+            else if (diffX > 50 && idx > 0) { idx--; }
+            update(true);
+        }, { passive: true });
+
         window.addEventListener('resize', function() {
             idx = Math.min(idx, getItems().length - 1);
             update();
@@ -216,6 +272,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     setupMobileCarousel('.locations-grid', 'locPrev', 'locNext', '.location-card');
     setupMobileCarousel('.gallery-grid', 'galPrev', 'galNext', '.gallery-item');
+    setupMobileCarousel('.tour-gallery-grid', 'tourGalPrev', 'tourGalNext', '.tour-gallery-item');
+    setupMobileCarousel('.practical-grid', 'practPrev', 'practNext', '.practical-item');
+
+    // --- Fee Badge Toggle (handled by route-stop click above) ---
 
     // --- Contact Form ---
     const bookingForm = document.getElementById('bookingForm');
@@ -233,21 +293,53 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     if (bookingForm) {
-    bookingForm.addEventListener('submit', (e) => {
+    bookingForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         
         const formData = new FormData(bookingForm);
         const data = Object.fromEntries(formData.entries());
-        
-        // Simple validation
-        if (!data.name || !data.email || !data.message) {
-            showNotification('Please fill in all required fields.', 'error');
-            return;
+        const submitBtn = bookingForm.querySelector('button[type="submit"]');
+        const originalText = submitBtn.textContent;
+
+        // Detect form type: booking (has 'date' + 'time') vs contact (has 'message')
+        var isBooking = data.date && data.time;
+        var endpoint = isBooking ? '/api/booking' : '/api/contact';
+
+        // Validation
+        if (isBooking) {
+            if (!data.name || !data.email || !data.date || !data.time) {
+                showNotification('Please fill in all required fields.', 'error');
+                return;
+            }
+        } else {
+            if (!data.name || !data.email || !data.message) {
+                showNotification('Please fill in all required fields.', 'error');
+                return;
+            }
         }
 
-        // Show success (in production, this would send to a server)
-        showNotification('Thank you for your message! We\'ll get back to you shortly.', 'success');
-        bookingForm.reset();
+        submitBtn.textContent = 'Sending...';
+        submitBtn.disabled = true;
+
+        try {
+            var res = await fetch(endpoint, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+            var result = await res.json();
+            if (result.ok) {
+                showNotification(result.message, 'success');
+                bookingForm.reset();
+            } else {
+                showNotification(result.message || 'Something went wrong. Please try again.', 'error');
+            }
+        } catch (err) {
+            showNotification('Connection error. Please email us directly at sales@dubrovnikgameofthronestours.com', 'error');
+        }
+
+        submitBtn.textContent = originalText;
+        submitBtn.disabled = false;
     });
     }
 
@@ -312,7 +404,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const handle     = slider.querySelector('.ba-handle');
         let isDragging   = false;
         let autoPaused   = false;
-        let resumeTimer  = null;
 
         function syncWidth() {
             beforeImg.style.width = slider.offsetWidth + 'px';
@@ -333,21 +424,34 @@ document.addEventListener('DOMContentLoaded', () => {
         syncWidth();
         window.addEventListener('resize', syncWidth);
 
-        function pauseWithResume() {
+        var card = slider.closest('.location-card');
+
+        function pauseAuto() {
             autoPaused = true;
-            clearTimeout(resumeTimer);
-            resumeTimer = setTimeout(() => { autoPaused = false; }, 2000);
+            if (card) {
+                card.classList.add('ba-dragging');
+                card.classList.remove('ba-show-overlay');
+            }
+        }
+        function resumeAuto() {
+            autoPaused = false;
+            if (card) {
+                card.classList.remove('ba-dragging');
+                if (window.innerWidth <= 768) {
+                    card.classList.add('ba-show-overlay');
+                }
+            }
         }
 
         baSliders.push({ setPct, isPaused: () => autoPaused });
 
-        slider.addEventListener('mousedown',  e => { isDragging = true; pauseWithResume(); moveTo(e.clientX); e.preventDefault(); });
-        window.addEventListener('mouseup',    () => isDragging = false);
+        slider.addEventListener('mousedown',  e => { isDragging = true; pauseAuto(); moveTo(e.clientX); e.preventDefault(); });
+        window.addEventListener('mouseup',    () => { if (isDragging) { isDragging = false; resumeAuto(); } });
         window.addEventListener('mousemove',  e => { if (isDragging) moveTo(e.clientX); });
 
-        slider.addEventListener('touchstart', e => { isDragging = true; pauseWithResume(); moveTo(e.touches[0].clientX); }, { passive: true });
-        window.addEventListener('touchend',   () => isDragging = false);
-        window.addEventListener('touchmove',  e => { if (isDragging) moveTo(e.touches[0].clientX); }, { passive: true });
+        slider.addEventListener('touchstart', e => { isDragging = true; pauseAuto(); moveTo(e.touches[0].clientX); }, { passive: true });
+        window.addEventListener('touchend',   () => { if (isDragging) { isDragging = false; resumeAuto(); } });
+        window.addEventListener('touchmove',  e => { if (isDragging) { e.preventDefault(); moveTo(e.touches[0].clientX); } }, { passive: false });
     });
 
     function baGlobalStep() {

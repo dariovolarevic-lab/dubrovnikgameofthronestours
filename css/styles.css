@@ -1057,6 +1057,24 @@ a:hover {
     transform: translateY(0);
 }
 
+/* Hide overlay while using before/after slider */
+.location-card.ba-dragging .location-overlay {
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+.location-card.ba-dragging:hover .location-overlay {
+    opacity: 0;
+}
+
+/* Show overlay on mobile after releasing BA slider */
+.location-card.ba-show-overlay .location-overlay {
+    background: linear-gradient(to top, rgba(10,10,10,0.98) 0%, rgba(10,10,10,0.5) 60%, rgba(200,169,81,0.05) 100%);
+}
+.location-card.ba-show-overlay .location-desc {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 /* ============================================
    GALLERY SECTION
    ============================================ */
@@ -1311,6 +1329,68 @@ a:hover {
     color: var(--text-muted);
 }
 
+/* Platform Booking Buttons */
+.platform-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 500px;
+    margin: 0 auto;
+    padding-top: 40px;
+}
+
+.platform-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 18px 32px;
+    border-radius: var(--radius-lg);
+    text-decoration: none;
+    font-family: 'Inter', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    transition: all var(--transition);
+    border: none;
+}
+
+.platform-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+}
+
+.platform-btn--ta {
+    background: #34a853;
+    color: #fff;
+}
+
+.platform-btn--ta:hover {
+    background: #2d9248;
+}
+
+.platform-btn--gyg {
+    background: #ff6400;
+    color: #fff;
+}
+
+.platform-btn--gyg:hover {
+    background: #e55a00;
+}
+
+.platform-btn-icon {
+    font-size: 1.3rem;
+}
+
+.platform-btn-text {
+    flex: 1;
+    text-align: left;
+}
+
+.platform-btn-rating {
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
 /* ============================================
    FAQ SECTION
    ============================================ */
@@ -1388,7 +1468,8 @@ a:hover {
 .booking-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 80px;
+    column-gap: 80px;
+    row-gap: 30px;
     align-items: flex-start;
 }
 
@@ -2197,10 +2278,16 @@ a:hover {
     margin: 0;
     line-height: 1.4;
     transition: color 0.3s ease;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    cursor: pointer;
 }
 
 .route-badge {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
     font-family: 'Inter', sans-serif;
     font-size: 0.6rem;
     font-weight: 600;
@@ -2210,9 +2297,10 @@ a:hover {
     border: 1px solid var(--gold);
     border-radius: 12px;
     padding: 1px 8px;
-    margin-left: 8px;
     vertical-align: middle;
     line-height: 1.6;
+    white-space: nowrap;
+    flex-shrink: 0;
 }
 
 .route-badge-fee {
@@ -2637,7 +2725,8 @@ a:hover {
     }
 
     .nav-back {
-        display: none;
+        display: block;
+        font-size: 0.8rem;
     }
 
     .nav-links {
@@ -2883,7 +2972,13 @@ a:hover {
 
 @media (max-width: 480px) {
     .sticky-booking-inner {
-        gap: 12px;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .sticky-booking-info {
+        width: 100%;
+        text-align: center;
     }
 
     .sticky-booking-name {
@@ -2893,6 +2988,18 @@ a:hover {
     .sticky-booking-btn {
         padding: 10px 20px;
         font-size: 0.7rem;
+    }
+
+    .booking-buttons-sticky {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .booking-buttons-sticky .btn-platform {
+        padding: 6px 12px;
+        font-size: 0.65rem;
+        flex: 1;
+        justify-content: center;
     }
 
     .booking-buttons-sticky {
@@ -2915,7 +3022,9 @@ a:hover {
    MOBILE CAROUSELS: Locations + Gallery
    ============================================ */
 .locations-carousel-controls,
-.gallery-carousel-controls {
+.gallery-carousel-controls,
+.tour-gallery-carousel-controls,
+.practical-carousel-controls {
     display: none;
 }
 
@@ -2923,6 +3032,13 @@ a:hover {
     /* Fix horizontal scroll / black space */
     html {
         overflow-x: hidden;
+    }
+
+    /* Hide overlay text during swipe */
+    .swiping .location-overlay,
+    .swiping .location-desc {
+        opacity: 0 !important;
+        transition: none !important;
     }
 
     /* Hero stats horizontal */
@@ -2961,6 +3077,11 @@ a:hover {
     /* Gallery carousel */
     .gallery-carousel {
         overflow: hidden;
+    }
+
+    /* Tour page navbar smaller */
+    .navbar-dark {
+        padding: 12px 0;
     }
     .gallery-grid {
         display: flex !important;
@@ -3004,5 +3125,86 @@ a:hover {
     }
     .booking-contact {
         gap: 14px;
+    }
+
+    /* Hero video: reduce zoom by making hero shorter */
+    .hero {
+        min-height: 60vh;
+    }
+
+    /* Task 1: Tour hero less padding on mobile */
+    .tour-hero {
+        padding-top: 50px;
+        min-height: auto;
+    }
+    .tour-hero-content {
+        padding: 30px 16px;
+    }
+    .tour-tag {
+        font-size: 0.7rem;
+        letter-spacing: 2px;
+        padding: 6px 14px;
+        margin-bottom: 12px;
+    }
+
+    /* Task 2: Tour gallery carousel */
+    .tour-gallery-carousel {
+        overflow: hidden;
+    }
+    .tour-gallery-grid {
+        display: flex !important;
+        gap: 16px;
+        transition: transform 0.4s ease;
+    }
+    .tour-gallery-item,
+    .tour-gallery-item.large {
+        min-width: 100%;
+        height: 250px;
+        flex-shrink: 0;
+        grid-column: unset;
+        grid-row: unset;
+    }
+    .tour-gallery-carousel-controls {
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+        margin-top: 20px;
+    }
+
+    /* Task 3: Practical info carousel */
+    .practical-carousel {
+        overflow: hidden;
+    }
+    .practical-grid {
+        display: flex !important;
+        gap: 16px;
+        transition: transform 0.4s ease;
+    }
+    .practical-item {
+        min-width: calc(100vw - 48px);
+        max-width: calc(100vw - 48px);
+        flex-shrink: 0;
+        box-sizing: border-box;
+    }
+    .practical-carousel-controls {
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+        margin-top: 20px;
+    }
+
+    /* Task 7: Fee badge - hide price by default, show on tap */
+    .fee-price {
+        display: none;
+    }
+    .route-fee-toggle.active .fee-price {
+        display: inline;
+    }
+
+    /* Badges always below title on mobile */
+    .route-card h4 {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
     }
 }
