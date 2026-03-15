@@ -2785,10 +2785,6 @@ a:hover {
         animation: none !important;
     }
 
-    .hero-video {
-        display: none;
-    }
-
     .hero-particles {
         display: none;
     }

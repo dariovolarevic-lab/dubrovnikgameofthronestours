@@ -5,9 +5,9 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     // --- Lazy Video Loading ---
-    // Hero video: only load on desktop
+    // Hero video: play after DOM load
     const heroVideo = document.querySelector('.hero-video');
-    if (heroVideo && window.innerWidth > 768) {
+    if (heroVideo) {
         heroVideo.preload = 'auto';
         heroVideo.play().catch(() => {});
     }
