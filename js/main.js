@@ -4,6 +4,30 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
+    // --- Lazy Video Loading ---
+    // Hero video: only load on desktop
+    const heroVideo = document.querySelector('.hero-video');
+    if (heroVideo && window.innerWidth > 768) {
+        heroVideo.preload = 'auto';
+        heroVideo.play().catch(() => {});
+    }
+
+    // Tour card videos: lazy autoplay when visible
+    const lazyVideos = document.querySelectorAll('.lazy-video');
+    if (lazyVideos.length && 'IntersectionObserver' in window) {
+        const videoObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                const video = entry.target;
+                if (entry.isIntersecting) {
+                    video.preload = 'auto';
+                    video.play().catch(() => {});
+                    videoObserver.unobserve(video);
+                }
+            });
+        }, { rootMargin: '200px' });
+        lazyVideos.forEach(v => videoObserver.observe(v));
+    }
+
     // --- Equalize Tour Card Rows ---
     function equalizeTourCards() {
         const names = document.querySelectorAll('.tour-name');
