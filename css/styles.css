@@ -1810,6 +1810,16 @@ a:hover {
     width: 100px;
     height: 100px;
     object-fit: contain;
+    animation: zmColorShift 4s ease-in-out infinite;
+}
+
+@keyframes zmColorShift {
+    0%, 100% {
+        filter: hue-rotate(0deg);
+    }
+    50% {
+        filter: hue-rotate(160deg);
+    }
 }
 
 .footer-bottom {
