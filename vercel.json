@@ -5,6 +5,19 @@
   "outputDirectory": ".",
   "trailingSlash": false,
   "cleanUrls": true,
+  "redirects": [
+    {
+      "source": "/:path(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "dubrovnikgameofthronestours.com"
+        }
+      ],
+      "destination": "https://www.dubrovnikgameofthronestours.com/:path",
+      "permanent": true
+    }
+  ],
   "headers": [
     {
       "source": "/sitemap.xml",
