@@ -3607,6 +3607,38 @@ a:hover {
     transform: translateY(-2px);
 }
 
+.blog-related {
+    margin-top: 48px;
+    padding-top: 32px;
+    border-top: 1px solid rgba(200, 169, 81, 0.2);
+}
+
+.blog-related h3 {
+    font-family: var(--font-heading);
+    color: var(--gold);
+    font-size: 1.2rem;
+    margin-bottom: 16px;
+}
+
+.blog-related ul {
+    list-style: none;
+    padding: 0;
+}
+
+.blog-related li {
+    margin-bottom: 12px;
+}
+
+.blog-related a {
+    text-decoration: none;
+    transition: opacity 0.2s;
+}
+
+.blog-related a:hover {
+    text-decoration: underline;
+    opacity: 0.85;
+}
+
 @media (max-width: 768px) {
     .blog-grid {
         grid-template-columns: 1fr;
